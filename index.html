@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="leaflet-search-master\leaflet-search-master\dist\leaflet-search.src.css" />
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""> </script>
+    <script src="leaflet-search-master\leaflet-search-master\dist\leaflet-search.src.js"></script>
+    <script src="./Data/msmelocGeojson.js"></script>
+    <script src="./Data/floodzone.js"></script>
+    <script src="Data\mukundapuram.js"></script>
+    <script src="Data\chavakkad.js"></script>
+    <script src="Data\kodungallur.js"></script>
+    <script src="Data\thalapally.js"></script>
+    <script src="Data\thrissur.js"></script>
+
+</script>
+    <style>
+       /*#map {position: absolute; top: 0; bottom: 0; left: 0; right: 0;}*/
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            width: 100%;
+            height: 100vh;
+        }
+    </style>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MSME Web Map</title>
+</head>
+
+<body>
+    
+    <div id="map" style="width: 100%;height: 800px;"></div>
+
+    <script>
+
+        var map = L.map('map').setView([ 10.5256264, 76.2132542], 13);
+
+//adding osm layer, satellite img from maptiler, terrin from leaflet basemap provider
+
+        var osm=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 20,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        })
+        osm.addTo(map);
+        
+        var MapTiler = L.tileLayer('https://api.maptiler.com/maps/satellite/{z}/{x}/{y}.jpg?key=30u5Pn7R29gM8g4X19yn', {
+        maxZoom: 20,
+        attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+        })
+
+        var Stamen_Terrain = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.{ext}', {
+        attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        subdomains: 'abcd',
+        minZoom: 5,
+        maxZoom: 20,
+        ext: 'png'
+        });
+        
+// makeing layer control. adding terrain map and satellite map
+
+        var basemap = {
+            'Open Street Map' :osm,
+            'Terrain' : Stamen_Terrain,
+            'Satellite image' :MapTiler
+        }
+
+
+//// mukundapuram taluk ////
+
+    var mukundapuramtlk = L.geoJSON(muk, {
+    style: function(feature) {
+    return {
+      fillColor: '#ff8533',  // Change the fill color of the layer
+      fillOpacity: 0.5,    // Change the fill opacity of the layer
+      color: 'black',        // Change the stroke color of the layer
+      weight: 2            // Change the stroke weight of the layer
+    };
+  },
+  onEachFeature: function(feature, layer) {
+    // Add a pop-up to each feature
+    layer.bindPopup("<p> <strong> Flood depth according to different return period- Calculated based on Historical data </strong> </p> <img src='Data/chalakudy 10 yrs.png', style='width:310px', 'height:650px' /> <br> <img src='Data/chalakudy 25 yrs.png', style='width:310px', 'height:650px' /> </br> <br> <img src='Data/chalakudy 50 yrs.png', style='width:310px', 'height:650px' /> </br>");
+  }
+
+}).addTo(map);
+
+//// chavakkad takuk ////
+    var chavakkadtlk = L.geoJSON(chav, {
+    style: function(feature) {
+    return {
+      fillColor: '#ff8533',  // Change the fill color of the layer
+      fillOpacity: 0.5,    // Change the fill opacity of the layer
+      color: 'black',        // Change the stroke color of the layer
+      weight: 2            // Change the stroke weight of the layer
+    };
+  },
+  onEachFeature: function(feature, layer) {
+    // Add a pop-up to each feature
+    layer.bindPopup("<p> Flood depth according to different return period- Calculated based on Historical data  </p> <img src='', style='width:270px', 'height:650px' /> <br> <img src='Data/mukundapuram 50 yrs.png', style='width:270px', 'height:650px' /> </br> <br> <img src='Data/chalakudy 10 yrs.png', style='width:270px', 'height:650px' /> </br>");
+  }
+
+}).addTo(map);
+
+//// kodungallur taluk ////
+
+var kodungallurtlk = L.geoJSON(kodu, {
+    style: function(feature) {
+    return {
+      fillColor: '#ff8533',  // Change the fill color of the layer
+      fillOpacity: 0.5,    // Change the fill opacity of the layer
+      color: 'black',        // Change the stroke color of the layer
+      weight: 2            // Change the stroke weight of the layer
+    };
+  },
+  onEachFeature: function(feature, layer) {
+    // Add a pop-up to each feature
+    layer.bindPopup("<p> Flood depth according to different return period- Calculated based on Historical data  </p> <img src='Data/chalakudy 25 yrs.png', style='width:270px', 'height:650px' /> <br> <img src='Data/mukundapuram 50 yrs.png', style='width:270px', 'height:650px' /> </br> <br> <img src='Data/chalakudy 10 yrs.png', style='width:270px', 'height:650px' /> </br>");
+  }
+
+}).addTo(map);
+
+//// thrissur taluk ////
+
+var thrissurtlk = L.geoJSON(tsr, {
+    style: function(feature) {
+    return {
+      fillColor: '#ff8533',  // Change the fill color of the layer
+      fillOpacity: 0.5,    // Change the fill opacity of the layer
+      color: 'black',        // Change the stroke color of the layer
+      weight: 2            // Change the stroke weight of the layer
+    };
+  },
+  onEachFeature: function(feature, layer) {
+    // Add a pop-up to each feature
+    layer.bindPopup("<p> Flood depth according to different return period- Calculated based on Historical data  </p> <img src='Data/chalakudy 25 yrs.png', style='width:270px', 'height:650px' /> <br> <img src='Data/mukundapuram 50 yrs.png', style='width:270px', 'height:650px' /> </br> <br> <img src='Data/chalakudy 10 yrs.png', style='width:270px', 'height:650px' /> </br>");
+  }
+
+}).addTo(map);
+
+//// thalapally taluk ////
+
+var thalapallytlk = L.geoJSON(tala, {
+    style: function(feature) {
+    return {
+      fillColor: '#ff8533',  // Change the fill color of the layer
+      fillOpacity: 0.5,    // Change the fill opacity of the layer
+      color: 'black',        // Change the stroke color of the layer
+      weight: 2            // Change the stroke weight of the layer
+    };
+  },
+  onEachFeature: function(feature, layer) {
+    // Add a pop-up to each feature
+    layer.bindPopup("<p> Flood depth according to different return period- Calculated based on Historical data </p> <img src='Data/chalakudy 25 yrs.png', style='width:270px', 'height:650px' /> <br> <img src='Data/mukundapuram 50 yrs.png', style='width:270px', 'height:650px' /> </br> <br> <img src='Data/chalakudy 10 yrs.png', style='width:270px', 'height:650px' /> </br>");
+  }
+
+}).addTo(map);
+
+
+        //adding GeoJson files flood layer and msme locations
+        var geojsonMarkerOptions = {
+        radius: 8,
+        title: "flood affected village!",
+        fillColor: "#cc5200",
+        color: "#000",
+        weight: 1,
+        opacity: 1,
+        fillOpacity: 0.8
+    };
+        var Locinfo = L.geoJSON(locationinfo,{
+    pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, geojsonMarkerOptions);
+            }
+        }
+        ).addTo(map).bindPopup("Flood Affected Village!")
+
+    //var flood = L.geoJSON(floodzonedata).addTo(map)
+var flood = L.geoJSON(floodzonedata, {
+  style: function(feature) {
+    return {
+      fillColor: '#006bb3',    // Change the fill color of the layer
+      fillOpacity: 0.6,     // Change the fill opacity of the layer
+      color: 'transparent',       // Change the stroke color of the layer
+      weight: 2             // Change the stroke weight of the layer
+    };
+  }
+}).addTo(map);
+
+// adding layer control for other layes. i.e. flood layes and msme points
+       
+        var overlayMaps = {
+            'Flood Map': flood,
+            'MSME location': Locinfo,
+            'Mukundapuram taluk' : mukundapuramtlk,
+            'Chavakkad taluk' : chavakkadtlk,
+            'Kodungallur taluk' : kodungallurtlk,
+            'Thrissur taluk' : thrissurtlk,
+            'Thalapally taluk' : thalapallytlk
+        }
+        L.control.layers(basemap, overlayMaps).addTo(map);
+
+// creating a search option
+
+        const searchControl = new L.Control.Search({
+            layer: Locinfo,
+            Zoom: '20',
+            propertyName: 'MSME'
+        });
+        map.addControl(searchControl);
+
+
+
+// Add pop ups to the markers that have flood information
+
+// markers for chalakudy
+
+
+var marker1 = L.marker([10.3041869, 76.3371037], {
+    title: "flood affected village!",
+})
+.addTo(map)
+.bindPopup("<h1> Flood Vulnerability of MSMEs in Chalakudy </h1> <p> Highest flood height recored:2.5 m, Longest flood duration recorded:2 days </p> <p> Number of flood affected MSMEs in this village : 12 </p>");
+
+var marker2 = L.marker([10.2400617,	76.3203091],{
+    title: "flood affected village!",
+})
+.addTo(map)
+.bindPopup("<h1> Flood Vulnerability of MSMEs in  Alathur,chalakudy </h1> <p> Highest flood height recored:3.5 m, Longest flood duration recorded:5 days </p> <p> Number of flood affected MSMEs in this village : 10 </p>");
+
+var marker3 = L.marker([10.2870588,	76.2985941],{
+    title: "flood affected village!",
+})
+.addTo(map)
+.bindPopup("<h1> Flood Vulnerability of MSMEs in Mala, Annallur,chalakudy </h1> <p> Highest flood height recored:3.6 m, Longest flood duration recorded:6 days </p> <p> Number of flood affected MSMEs in this village : 2 </p>");
+
+var marker4 = L.marker([10.2947133,	76.336547],{
+    title: "flood affected village!",
+})
+.addTo(map)
+.bindPopup("<h1> Flood vulnerability of MSMEs in East chalakkudy, chalakudy </h1> <p> Highest flood height recored:1.5 m, Longest flood duration recorded:3 days </p> <p> Number of flood affected MSMEs in this village : 12 </p>");
+
+var marker5 = L.marker([10.322418, 76.3564929],{
+    title: "flood affected village!",
+})
+.addTo(map)
+.bindPopup("<h1> Flood vulnerability of MSMEs in Kodassery, elinjipra, chalakudy </h1> <p> Highest flood height recored:2.7 m, Longest flood duration recorded:5 days </p> <p> Number of flood affected MSMEs in this village : 5 </p>");
+
+var marker6 = L.marker([10.2114559, 76.291355],{
+    title: "flood affected village!",
+})
+.addTo(map)
+.bindPopup("<h1> Flood vulnerability of MSMEs in Kuzhur, Kakkulissery, chalakudy </h1> <p> Highest flood height recored:1.5 m, Longest flood duration recorded:5 days </p> <p> Number of flood affected MSMEs in this village : 23 </p>");
+
+var marker7 = L.marker([10.2400617,	76.3203091],{
+    title: "flood affected village",
+})
+.addTo(map)
+.bindPopup("<h1> Flood vulnerability of MSMEs in Kallur Thekkummuri,chalakudy </h1> <p> Highest flood height recored:2.5 m, Longest flood duration recorded:3 days </p> <p> Number of flood affected MSMEs in this village : 69 </p>");
+
+var marker8 = L.marker([10.2685705,	76.2995464],{
+    title: "flood affected village",
+})
+.addTo(map)
+.bindPopup("<h1> Flood vulnerability of MSMEs in Kallur Vadakkummuri,chalakudy </h1> <p> Highest flood height recored:3.1 m, Longest flood duration recorded:5 days </p> <p> Number of flood affected MSMEs in this village : 4 </p>");
+
+var marker9 = L.marker([10.2649196,	76.3487151],{
+    title: "flood affected village",
+})
+.addTo(map)
+.bindPopup("<h1> Flood vulnerability of MSMEs in Koratty Kizhakkummuri, chalakudy </h1> <p> Highest flood height recored:3 m, Longest flood duration recorded:3 days </p> <p> Number of flood affected MSMEs in this village : 4 </p>");
+
+var marker10 = L.marker([10.3757942, 76.3581735],{
+    title: "flood affected village",
+})
+.addTo(map)
+.bindPopup("<h1> Flood vulnerability of MSMEs in Mattathur, chalakudy </h1> <p> Highest flood height recored:2.4 m, Longest flood duration recorded:3 days </p> <p> Number of flood affected MSMEs in this village : 9 </p>");
+
+var marker11 = L.marker([10.3001732, 76.3810922],{
+    title: "flood affected village",
+})
+.addTo(map)
+.bindPopup("<h1> Flood vulnerability of MSMEs in Meloor, chalakudy </h1> <p> Highest flood height recored:1.8 m, Longest flood duration recorded:3 days </p> <p> Number of flood affected MSMEs in this village : 20 </p>");
+
+var marker12 = L.marker([10.4000055, 76.3434679],{
+    title: "flood affected village",
+})
+.addTo(map)
+.bindPopup("<h1> Flood vulnerability of MSMEs in Varandarappilly, chalakudy </h1> <p> Highest flood height recored:2.4 m, Longest flood duration recorded:4 days </p> <p> Number of flood affected MSMEs in this village : 21 </p>");
+
+var marker13 = L.marker([10.2834371, 76.3420206],{
+    title: "flood affected village",
+})
+.addTo(map)
+.bindPopup("<h1> Flood vulnerability of MSMEs in Muringoor Vadakkummuri, chalakudy </h1> <p> Highest flood height recored:3.1 m, Longest flood duration recorded:5 days </p> <p> Number of flood affected MSMEs in this village : 4 </p>");
+
+var marker14 = L.marker([10.3081241, 76.3663094],{
+    title: "flood affected village",
+})
+.addTo(map)
+.bindPopup("<h1> Flood vulnerability of MSMEs in Koodapuzha, chalakudy </h1> <p> Highest flood height recored:4.5 m, Longest flood duration recorded:4 days </p> <p> Number of flood affected MSMEs in this village : 7 </p>");
+
+var marker15 = L.marker([10.3070105, 76.3340589],{
+    title: "flood affected village",
+})
+.addTo(map)
+.bindPopup("<h1> Flood vulnerability of MSMEs in Pariyaram, Chalakkudy </h1> <p> Highest flood height recored:4.3 m, Longest flood duration recorded:4 days </p> <p> Number of flood affected MSMEs in this village : 13 </p>");
+
+var marker16 = L.marker([10.274136,	76.3251131],{
+    title: "flood affected village",
+})
+.addTo(map)
+.bindPopup("<h1> Flood vulnerability of MSMEs in Kadukutti, chalakudy </h1> <p> Highest flood height recored:3.9 m, Longest flood duration recorded:6 days </p> <p> Number of flood affected MSMEs in this village : 8 </p>");
+
+var marker17 = L.marker([10.3044692, 76.3285103],{
+    title: "flood affected village",
+})
+.addTo(map)
+.bindPopup("<h1> Flood vulnerability of MSMEs in West Chalakudy, chalakudy </h1> <p> Highest flood height recored:1.8 m, Longest flood duration recorded:5 days </p> <p> Number of flood affected MSMEs in this village : 22 </p>");
+
+
+// markers for Mukundapuram
+
+var markerA = L.marker([10.3753143, 76.2797715],{
+    title: "flood affected village",
+})
+.addTo(map)
+.bindPopup("<h1> Flood vulnerability of MSMEs in Alatur, Mukundapuram </h1> <p> Highest flood height recored:3 m, Longest flood duration recorded:5 days </p> <p> Number of flood affected MSMEs in this village : 12 </p>");
+
+var markerB = L.marker([10.4534933, 76.2630442],{
+    title: "flood affected village",
+})
+.addTo(map)
+.bindPopup("<h1> Flood vulnerability of MSMEs in Thalavanikara, Mukundapuram</h1> <p> Highest flood height recored:2 m, Longest flood duration recorded:4 days </p> <p> Number of flood affected MSMEs in this village : 12 </p>");
+
+var markerC = L.marker([10.4453672,	76.2508086],{
+    title: "flood affected village",
+})
+.addTo(map)
+.bindPopup("<h1> Flood vulnerability of MSMEs in Chittiserry, Mukundapuram </h1> <p> Highest flood height recoredt:2.1 m, Longest flood duration recorded:3 days </p> <p> Number of flood affected MSMEs in this village : 12 </p>");
+
+var markerD = L.marker([10.2127596, 76.2653419],{
+    title: "flood affected village",
+})
+.addTo(map)
+.bindPopup("<h1> Flood vulnerability of MSMEs in Tottipaal, Mukundapuram </h1> <p> Highest flood height recored:2.5 m, Longest flood duration recorded:5 days </p> <p> Number of flood affected MSMEs in this village : 12 </p>");
+ 
+var markerE = L.marker([10.4375818,	76.2489959],{
+    title: "flood affected village",
+})
+.addTo(map)
+.bindPopup("<h1> Flood vulnerability of MSMEs in Parapukkara, Mukundapuram </h1> <p> Highest flood height recored:1.5 m, Longest flood duration recorded:2 days </p> <p> Number of flood affected MSMEs in this village : 12 </p>");
+
+var markerF = L.marker([10.2127596, 76.2653419],{
+    title: "flood affected village",
+})
+.addTo(map)
+.bindPopup("<h1> Flood vulnerability of MSMEs in Nenmanikara, Mukundapuram </h1> <p> Highest flood height recored:1.8 m, Longest flood duration recorded:4 days </p> <p> Number of flood affected MSMEs in this village : 12 </p>");
+
+var markerG = L.marker([10.4052718,	76.2768237],{
+    title: "flood affected village",
+})
+.addTo(map)
+.bindPopup("<h1> Flood vulnerability of MSMEs in Nandikara, Mukundapuram </h1> <p> Highest flood height recored:2.4 m, Longest flood duration recorded:4 days </p> <p> Number of flood affected MSMEs in this village : 12 </p>");
+
+var markerH = L.marker([10.2127596,	76.2653419],{
+    title: "flood affected village",
+})
+.addTo(map)
+.bindPopup("<h1> Flood vulnerability of MSMEs in Kolathur, Mukundapuram </h1> <p> Highest flood height recored:3 m, Longest flood duration recorded:5 days </p> <p> Number of flood affected MSMEs in this village : 12 </p>");
+
+var markerI = L.marker([10.3941055,	76.2862873],{
+    title: "flood affected village",
+})
+.addTo(map)
+.bindPopup("<h1> Flood vulnerability of MSMEs in Nellayi, Mukundapuram </h1> <p> Highest flood height recoredt:1.2 m, Longest flood duration recorded:3 days </p> <p> Number of flood affected MSMEs in this village : 12 </p>");
+
+var markerJ = L.marker([10.3454442, 76.2158060],{
+    title: "flood affected village",
+})
+.addTo(map)
+.bindPopup("<h1> Flood vulnerability of MSMEs in Irinjalakuda, Mukundapuram </h1> <p> Highest flood height recored:3 m, Longest flood duration recorded:4 days </p> <p> Number of flood affected MSMEs in this village : 12 </p>");
+
+var markerK = L.marker([10.3717111, 76.3042007],{
+    title: "flood affected village",
+})
+.addTo(map)
+.bindPopup("<h1> Flood vulnerability of MSMEs in Kodakara, Mukundapuram </h1> <p> Highest flood height recored:4 m, Longest flood duration recorded:6 days </p> <p> Number of flood affected MSMEs in this village : 12 </p>");
+  
+ </script>
+</body>
+</html>
