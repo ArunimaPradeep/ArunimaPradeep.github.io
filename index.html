@@ -39,7 +39,7 @@
 
     <script>
 
-        var map = L.map('map').setView([ 10.5256264, 76.2132542], 13);
+        var map = L.map('map').setView([ 10.5256264, 76.2132542], 11);
 
 //adding osm layer, satellite img from maptiler, terrin from leaflet basemap provider
 
@@ -101,7 +101,7 @@
   },
   onEachFeature: function(feature, layer) {
     // Add a pop-up to each feature
-    layer.bindPopup("<p> Flood depth according to different return period- Calculated based on Historical data  </p> <img src='Data/chavakkad 10 years.png', style='width:320px', 'height:650px' /> <br> <img src='Data/chavakkad 25 yrs.png', style='width:320px', 'height:650px' /> </br> <br> <img src='Data/chavakkad 50 yrs.png', style='width:320px', 'height:650px' /> </br>");
+    layer.bindPopup("<p> <strong> Flood depth according to different return period- Calculated based on Historical data </strong> </p> <img src='Data/chavakkad 10 years.png', style='width:320px', 'height:650px' /> <br> <img src='Data/chavakkad 25 yrs.png', style='width:320px', 'height:650px' /> </br> <br> <img src='Data/chavakkad 50 yrs.png', style='width:320px', 'height:650px' /> </br>");
   }
 
 }).addTo(map);
@@ -119,7 +119,7 @@ var kodungallurtlk = L.geoJSON(kodu, {
   },
   onEachFeature: function(feature, layer) {
     // Add a pop-up to each feature
-    layer.bindPopup("<p> Flood depth according to different return period- Calculated based on Historical data  </p> <img src='Data/kodugallur 10 yrs.png', style='width:320px', 'height:650px' /> <br> <img src='Data/kodungallur 25 yrs.png', style='width:320px', 'height:650px' /> </br> <br> <img src='Data/kodungallur 50 years.png', style='width:320px', 'height:650px' /> </br>");
+    layer.bindPopup("<p> <strong> Flood depth according to different return period- Calculated based on Historical data </strong> </p> <img src='Data/kodugallur 10 yrs.png', style='width:320px', 'height:650px' /> <br> <img src='Data/kodungallur 25 yrs.png', style='width:320px', 'height:650px' /> </br> <br> <img src='Data/kodungallur 50 years.png', style='width:320px', 'height:650px' /> </br>");
   }
 
 }).addTo(map);
@@ -137,7 +137,7 @@ var thrissurtlk = L.geoJSON(tsr, {
   },
   onEachFeature: function(feature, layer) {
     // Add a pop-up to each feature
-    layer.bindPopup("<p> Flood depth according to different return period- Calculated based on Historical data  </p> <img src='Data/thrissur_10yr_rp.png', style='width:270px', 'height:650px' /> <br> <img src='Data/thrissur 25 yrs.png', style='width:320px', 'height:650px' /> </br> <br> <img src='Data/thrissur 50 yrs.png', style='width:320px', 'height:650px' /> </br>");
+    layer.bindPopup("<p> <strong> Flood depth according to different return period- Calculated based on Historical data </strong> </p> <img src='Data/thrissur_10yr_rp.png', style='width:270px', 'height:650px' /> <br> <img src='Data/thrissur 25 yrs.png', style='width:320px', 'height:650px' /> </br> <br> <img src='Data/thrissur 50 yrs.png', style='width:320px', 'height:650px' /> </br>");
   }
 
 }).addTo(map);
@@ -155,7 +155,7 @@ var thalapallytlk = L.geoJSON(tala, {
   },
   onEachFeature: function(feature, layer) {
     // Add a pop-up to each feature
-    layer.bindPopup("<p> Flood depth according to different return period- Calculated based on Historical data </p> <img src='Data/thalapally_10yr_rp.png', style='width:320px', 'height:650px' /> <br> <img src='Data/thalapally 25 yrs.png', style='width:320px', 'height:650px' /> </br> <br> <img src='Data/Thalapally 50 yrs.png', style='width:320px', 'height:650px' /> </br>");
+    layer.bindPopup("<p> Flood depth according to different return period- Calculated based on Historical data </strong></p> <img src='Data/thalapally_10yr_rp.png', style='width:320px', 'height:650px' /> <br> <img src='Data/thalapally 25 yrs.png', style='width:320px', 'height:650px' /> </br> <br> <img src='Data/Thalapally 50 yrs.png', style='width:320px', 'height:650px' /> </br>");
   }
 
 }).addTo(map);
