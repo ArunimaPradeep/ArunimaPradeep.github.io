@@ -7,5 +7,4 @@
 - Flood depth per village is visualized in the interactive map  
 &nbsp;
 ![Todal area flooded and the flood depth per taluk](.Data/CIMA_RP_graphs.png)
-&nbsp;
 ---
