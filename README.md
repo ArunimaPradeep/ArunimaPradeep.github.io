@@ -6,3 +6,5 @@
 - This graph represents taluks in Thrissur distrit
 - Flood depth per village is visualized in the interactive map  
 &nbsp;
+![Todal area flooded and the flood depth per taluk](.Data/CIMA RP graphs.png)
+&nbsp;
